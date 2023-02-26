@@ -1,11 +1,13 @@
 from ast import Try
-from django.shortcuts import render, redirect
+from time import timezone
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm
 from .models import Task
+from django.utils import timezone
 
 # Create your views here.
 
@@ -58,7 +60,27 @@ def create_task(request):
         except ValueError:
             return render(request, 'create_task.html', {'error': 'Please provide valid data'})
     
+def task_detail(request, task_id):
+    if request.method == 'GET':
+        task = get_object_or_404(Task, pk=task_id, user=request.user)
+        form = TaskForm(instance=task)
+        return render(request, 'task_detail.html', {'task': task, 'form': form,})
+    else:
+        try:
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            form = TaskForm(request.POST, instance=task)
+            form.save()
+            return redirect('tasks')
+        except ValueError:
+            return render(request, 'task_detail.html', {'task': task, 'form': form, 'error':"Error updating a task"})
 
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.datecompleted = timezone.now()
+        task.save()
+        return redirect('tasks')
+        
 def signout(request):
     logout(request)
     return redirect('home')
