@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from tasks import views
 
@@ -30,7 +32,6 @@ urlpatterns = [
     path('tasks/<int:task_id>/delete', views.delete_task , name='delete_task'),
     path('logout/', views.signout, name='logout'),
     path('signin/', views.signin, name='signin')
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-]
-
-urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += staticfiles_urlpatterns()

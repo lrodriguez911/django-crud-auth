@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'djangocrudauth.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://djangocrudauth_d4ek_user:MY65LvcG5MBnMgcJqAhBg5QgDwDmQWGO@dpg-cfv726kgqg48ssttqfog-a.oregon-postgres.render.com/djangocrudauth_d4ek',
+        default= os.environ.get('DATABASE_URL', default='postgres://djangocrudauth_d4ek_user:MY65LvcG5MBnMgcJqAhBg5QgDwDmQWGO@dpg-cfv726kgqg48ssttqfog-a.oregon-postgres.render.com/djangocrudauth_d4ek'),
         conn_max_age=600
     )
     
@@ -127,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
