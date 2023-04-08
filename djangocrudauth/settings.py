@@ -136,15 +136,17 @@ STATIC_URL = 'static/'
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    print(STATIC_ROOT)
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+    print(STATICFILES_STORAGE)
 
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-print(STATIC_ROOT)
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-print(STATICFILES_STORAGE)
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+# print(STATIC_ROOT)
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# print(STATICFILES_STORAGE)
 LOGIN_URL = '/sigin'
 
 # Default primary key field type
