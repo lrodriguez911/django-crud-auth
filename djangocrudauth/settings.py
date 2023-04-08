@@ -26,11 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-print('debug')
-print(os.environ)
+DEBUG = 'RENDER' not in os.environ
+
 print('debug', DEBUG)
+
 ALLOWED_HOSTS = ['*']
+
+print(ALLOWED_HOSTS)
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -138,10 +140,11 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
+print(STATIC_ROOT)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+print(STATICFILES_STORAGE)
 LOGIN_URL = '/sigin'
 
 # Default primary key field type
