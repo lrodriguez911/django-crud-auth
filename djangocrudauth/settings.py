@@ -143,7 +143,7 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 print(STATIC_ROOT)
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 print(STATICFILES_STORAGE)
 LOGIN_URL = '/sigin'
 
