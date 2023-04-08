@@ -27,7 +27,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
-
+print('debug')
+print(os.environ)
+print('debug', DEBUG)
 ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -136,7 +138,6 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-print(not DEBUG)
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
